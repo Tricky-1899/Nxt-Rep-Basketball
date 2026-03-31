@@ -3,32 +3,225 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Contact Nxt Rep Basketball" />
+  <meta name="description" content="Contact Nxt Rep Basketball — book a private training session, enquire about school programs or get in touch about partnerships." />
   <title>Contact | Nxt Rep Basketball</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><div class="container nav-container"><a href="index.html" class="logo-text">NXT<span>.</span>REP</a><nav><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="programs.html">Programs</a></li><li><a href="partnerships.html">Partnerships</a></li><li><a href="contact.html" class="nav-cta active">Book Now</a></li></ul></nav><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></div></header>
-<div class="mobile-nav" id="mobileNav"><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="partnerships.html">Partnerships</a><a href="contact.html">Book Now</a></div>
+
+<header>
+  <div class="container nav-container">
+    <a href="index.html" class="logo-text">NXT<span>.</span>REP</a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="partnerships.html">Partnerships</a></li>
+        <li><a href="contact.html" class="nav-cta active">Book Now</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="programs.html">Programs</a>
+  <a href="partnerships.html">Partnerships</a>
+  <a href="contact.html">Book Now</a>
+</div>
+
 <main>
-  <div class="page-header"><div class="container"><p class="section-tag">Contact</p><h1>LET'S TALK<br>BASKETBALL.</h1><p>Get in touch for private sessions, school programs or partnerships.</p></div></div>
-  <section><div class="container"><div class="contact-grid">
-    <div><p class="section-tag" style="margin-bottom:32px">Send a Message</p>
-    <div class="contact-form" id="contactForm">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-        <div class="form-group"><label>First name</label><input type="text" id="firstName" placeholder="Yianni"/></div>
-        <div class="form-group"><label>Last name</label><input type="text" id="lastName" placeholder="Smith"/></div>
-      </div>
-      <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="you@email.com"/></div>
-      <div class="form-group"><label>Phone (optional)</label><input type="tel" id="phone" placeholder="04XX XXX XXX"/></div>
-      <div class="form-group"><label>Enquiry type</label><select id="enquiryType"><option value="" disabled selected>Select an option</option><option>Private training session</option><option>School program partnership</option><option>Team / club coaching</option><option>General enquiry</option></select></div>
-      <div class="form-group"><label>Message</label><textarea id="message" placeholder="Tell us what you're looking for..."></textarea></div>
-      <button class="btn-primary" style="border:none;cursor:pointer;font-family:var(--font-body);" onclick="handleSubmit()">Send Message</button>
+  <div class="page-header">
+    <div class="container">
+      <p class="section-tag">Contact</p>
+      <h1>LET'S TALK<br>BASKETBALL.</h1>
+      <p>Whether you're booking a private session, enquiring about school programs or exploring a partnership — get in touch and we'll get back to you fast.</p>
     </div>
-    <div id="successMsg" style="display:none;padding:32px;background:var(--grey);border-left:3px solid var(--red);margin-top:20px"><h3 style="font-size:1.4rem">Message sent.</h3><p>We'll get back to you within 24 hours.</p></div></div>
-    <div class="contact-info"><p class="section-tag" style="margin-bottom:32px">Direct Contact</p><h3>WE'LL GET BACK<br>TO YOU FAST.</h3><p>Response time usually within 24 hours.</p><div class="contact-detail"><div class="contact-detail-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="rgba(245,245,240,0.5)" stroke-width="1.5" stroke-linecap="round"><path d="M3 4h12a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z"/><path d="M2 5l7 5 7-5"/></svg></div><div class="contact-detail-text"><strong>Email</strong><a href="mailto:info@nxtrep.com.au" style="color:#888">info@nxtrep.com.au</a></div></div><div class="contact-detail"><div class="contact-detail-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="rgba(245,245,240,0.5)" stroke-width="1.5" stroke-linecap="round"><path d="M9 2C6.24 2 4 4.24 4 7c0 4.25 5 9 5 9s5-4.75 5-9c0-2.76-2.24-5-5-5z"/><circle cx="9" cy="7" r="1.5"/></svg></div><div class="contact-detail-text"><strong>Location</strong><span>Sydney, NSW, Australia</span></div></div></div>
-  </div></div></section>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- FORM -->
+        <div>
+          <p class="section-tag" style="margin-bottom:32px;">Send a Message</p>
+          <div class="contact-form" id="contactForm">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div class="form-group">
+                <label>First name</label>
+                <input type="text" placeholder="Yianni" id="firstName" />
+              </div>
+              <div class="form-group">
+                <label>Last name</label>
+                <input type="text" placeholder="Smith" id="lastName" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email address</label>
+              <input type="email" placeholder="you@email.com" id="email" />
+            </div>
+            <div class="form-group">
+              <label>Phone (optional)</label>
+              <input type="tel" placeholder="04XX XXX XXX" id="phone" />
+            </div>
+            <div class="form-group">
+              <label>What are you enquiring about?</label>
+              <select id="enquiryType">
+                <option value="" disabled selected>Select an option</option>
+                <option>Private training session</option>
+                <option>School program partnership</option>
+                <option>Team / club coaching</option>
+                <option>General enquiry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea placeholder="Tell us a bit about what you're looking for, your age group, location, or anything else relevant." id="message"></textarea>
+            </div>
+            <button class="btn-primary" id="submitBtn" style="border:none;cursor:pointer;font-family:var(--font-body);" onclick="handleSubmit()">Send Message</button>
+          </div>
+          <div id="successMsg" style="display:none;padding:32px;background:var(--grey);border-left:3px solid var(--red);margin-top:20px;">
+            <h3 style="font-size:1.4rem;margin-bottom:8px;">Message sent.</h3>
+            <p>We'll get back to you within 24 hours.</p>
+          </div>
+        </div>
+
+        <!-- CONTACT INFO -->
+        <div class="contact-info">
+          <p class="section-tag" style="margin-bottom:32px;">Direct Contact</p>
+          <h3>WE'LL GET BACK<br>TO YOU FAST.</h3>
+          <p>Response time is usually within 24 hours. For urgent bookings, email directly.</p>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="rgba(245,245,240,0.5)" stroke-width="1.5" stroke-linecap="round">
+                <path d="M3 4h12a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z"/>
+                <path d="M2 5l7 5 7-5"/>
+              </svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Email</strong>
+              <a href="mailto:info@nxtrep.com.au" style="color:#888;">info@nxtrep.com.au</a>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="rgba(245,245,240,0.5)" stroke-width="1.5" stroke-linecap="round">
+                <path d="M9 2C6.24 2 4 4.24 4 7c0 4.25 5 9 5 9s5-4.75 5-9c0-2.76-2.24-5-5-5z"/>
+                <circle cx="9" cy="7" r="1.5"/>
+              </svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Location</strong>
+              <span>Sydney, NSW, Australia</span>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="rgba(245,245,240,0.5)" stroke-width="1.5" stroke-linecap="round">
+                <rect x="2" y="2" width="14" height="14" rx="4"/>
+                <circle cx="9" cy="9" r="3"/>
+                <circle cx="13.5" cy="4.5" r="0.5" fill="rgba(245,245,240,0.5)" stroke="none"/>
+              </svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Instagram</strong>
+              <a href="#" style="color:#888;">@nxtrep</a>
+            </div>
+          </div>
+
+          <div style="margin-top:48px;padding:32px;background:var(--grey);">
+            <p class="section-tag" style="margin-bottom:16px;">Quick Reference</p>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid rgba(245,245,240,0.06);">
+                <span style="font-size:0.85rem;color:#888;">School programs</span>
+                <a href="partnerships.html" style="font-size:0.85rem;color:var(--red);">Learn more →</a>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid rgba(245,245,240,0.06);">
+                <span style="font-size:0.85rem;color:#888;">Private training</span>
+                <a href="programs.html" style="font-size:0.85rem;color:var(--red);">Learn more →</a>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:0.85rem;color:#888;">Team coaching</span>
+                <a href="programs.html" style="font-size:0.85rem;color:var(--red);">Learn more →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
 </main>
-<footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="logo-text">NXT<span style="color:var(--red)">.</span>REP</span><p>Professional basketball coaching across NSW.</p></div><div class="footer-col"><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="programs.html">Programs</a></li><li><a href="partnerships.html">Partnerships</a></li><li><a href="contact.html">Contact</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@nxrep.com.au">info@nxtrep.com.au</a></li><li><a href="contact.html">Book a Session</a></li></ul></div></div><div class="footer-bottom"><p >&copy; 2026 Nxt Rep Basketball.</p><p >NSW, Australia</p></div></div></footer>
-<script>const h=document.getElementById('hamburger');const m=document.getElementById('mobileNav');h.addEventListener('click',()=>m.classList.toggle('open'));m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>m.classList.remove('open')));function handleSubmit(){const f=document.getElementById('firstName').value;const e=document.getElementById('email').value;const q=document.getElementById('enquiryType').value;const m=document.getElementById('message').value;if(!f||!e||!q||!m){alert('Please fill in all required fields.');return}document.getElementById('contactForm').style.display='none';document.getElementById('successMsg').style.display='block';}</script>
-</body></html>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-text">NXT<span style="color:var(--red)">.</span>REP</span>
+        <p>Professional basketball coaching, school programs and private training across NSW, Australia.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="partnerships.html">Partnerships</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="programs.html">School Programs</a></li>
+          <li><a href="programs.html">Private Training</a></li>
+          <li><a href="programs.html">Team Coaching</a></li>
+          <li><a href="partnerships.html">Partner With Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@nxtrep.com.au">info@nxtrep.com.au</a></li>
+          <li><a href="contact.html">Book a Session</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Nxt Rep Basketball. All rights reserved.</p>
+      <p>NSW, Australia</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', () => mobileNav.classList.toggle('open'));
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+  function handleSubmit() {
+    const first = document.getElementById('firstName').value;
+    const email = document.getElementById('email').value;
+    const enquiry = document.getElementById('enquiryType').value;
+    const message = document.getElementById('message').value;
+    if (!first || !email || !enquiry || !message) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  }
+</script>
+</body>
+</html>
