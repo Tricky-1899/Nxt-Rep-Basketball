@@ -107,7 +107,7 @@
             </div>
             <div class="contact-detail-text">
               <strong>Email</strong>
-              <a href="mailto:info@nxtrep.com.au" style="color:#888;">info@nxtrep.com.au</a>
+              <a href="mailto:info@nxtrepbasketball.com.au" style="color:#888;">info@nxtrepbasketball.com.au</a>
             </div>
           </div>
 
@@ -191,7 +191,7 @@
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="mailto:info@nxtrep.com.au">info@nxtrep.com.au</a></li>
+          <li><a href="mailto:info@nxtrepbasketball.com.au">info@nxtrepbasketball.com.au</a></li>
           <li><a href="contact.html">Book a Session</a></li>
           <li><a href="#">Instagram</a></li>
         </ul>
@@ -219,8 +219,8 @@
       alert('Please fill in all required fields.');
       return;
     }
-    document.getElementById('contactForm').style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
+    const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.textContent = 'Sending...'; fetch('https://formsubmit.co/ajax/info@nxtrepbasketball.com.au', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ name: first + ' ' + document.getElementById('lastName').value, email: email, phone: document.getElementById('phone').value, enquiry: enquiry, message: message, _subject: 'New website enquiry: ' + enquiry, _replyto: email, _template: 'table' }) }).then(r => r.json()).then(d => { if (d.success === 'true' || d.success === true) { document.getElementById('contactForm').style.display = 'none'; document.getElementById('successMsg').style.display = 'block'; } else { throw new Error('send failed'); } }).catch(() => { btn.disabled = false; btn.textContent = 'Send Message'; alert('Sorry, that did not send. Please email info@nxtrepbasketball.com.au directly.'); });
+    
   }
 </script>
 </body>
