@@ -9,7 +9,7 @@ Owner: Yianni (Nxt Rep Basketball). Spelling: British/Australian English.
 - The "Site checks" GitHub Action must pass (green tick) before merging. Run it locally with `python3 .github/scripts/check_site.py`.
 - If a merge breaks the live site: Vercel → Deployments → last good deployment → Instant Rollback.
 - The "Lint and security scan" workflow must also pass: HTMLHint (`.htmlhintrc`), ESLint (`eslint.config.mjs`, bans `innerHTML`/`eval`/`document.write`), Stylelint (`.stylelintrc.json`) and CodeQL. Fix the code, don't loosen the rules, unless Yianni agrees.
-- **No inline code:** no `<script>` blocks, `on…=` handlers, `<style>` blocks or `style=""`. JavaScript goes in `/assets/*.js` (`defer`), styles in `style.css`. The site checks fail otherwise, because the Content-Security-Policy depends on it.
+- **No inline code:** no `<script>` blocks, `on…=` handlers, `<style>` blocks or `style=""`. JavaScript goes in `/assets/*.js` (`defer`), styles in `style.css`. The site checks fail otherwise. The Content-Security-Policy in `vercel.json` is strict (no `'unsafe-inline'`), so browsers refuse to run inline code on the live site. Don't add `'unsafe-inline'` back.
 
 ## Stack
 - Plain HTML + one `style.css`. No framework, no build step, no npm.
