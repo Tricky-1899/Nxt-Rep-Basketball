@@ -763,3 +763,9 @@ footer {
 .quick-ref li:last-child { padding-bottom: 0; border-bottom: none; }
 .quick-ref li span { color: var(--light-grey); }
 .quick-ref li a { color: var(--red); }
+
+/* ─── PROGRAMS + PARTNERSHIPS (moved from inline styles) ─── */
+.card-cta { margin-top: 32px; display: inline-block; }
+.shooting-stats .section-tag { margin-bottom: 24px; }
+.why-grid.why-grid-single { grid-template-columns: 1fr; margin-top: 0; }
+.lead-narrow { max-width: 600px; margin-bottom: 48px; }

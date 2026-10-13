@@ -10,7 +10,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon-light-32.png" media="(prefers-color-scheme: dark)" />
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-dark-192.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
+  <!-- AUDIT: shared menu script (null-safe, accessible), replaces the inline one. -->
+  <script src="/assets/site.js" defer></script>
 </head>
 <body>
 
@@ -21,24 +23,24 @@
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="/programs" class="active">Programs</a></li>
+        <li><a href="/programs" class="active" aria-current="page">Programs</a></li>
         <li><a href="/partnerships">Partnerships</a></li>
         <li><a href="/assessment" class="nav-cta">Book Now</a></li>
       </ul>
     </nav>
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<div class="mobile-nav" id="mobileNav">
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
   <a href="/">Home</a>
   <a href="/about">About</a>
-  <a href="/programs">Programs</a>
+  <a href="/programs" aria-current="page">Programs</a>
   <a href="/partnerships">Partnerships</a>
   <a href="/assessment">Book Now</a>
-</div>
+</nav>
 
 <main>
   <div class="page-header">
@@ -67,7 +69,7 @@
             <li>Safe, organised and high-energy</li>
             <li>Available in Sydney metro area</li>
           </ul>
-          <a href="/contact" class="btn-primary" style="margin-top:32px;display:inline-block;">Enquire Now</a>
+          <a href="/contact" class="btn-primary card-cta">Enquire Now</a>
         </div>
 
         <!-- Private Training -->
@@ -84,7 +86,7 @@
             <li>Progressive monthly planning</li>
             <li>Sydney-based, travel negotiable</li>
           </ul>
-          <a href="/assessment" class="btn-outline" style="margin-top:32px;display:inline-block;">Book a Free Assessment</a>
+          <a href="/assessment" class="btn-outline card-cta">Book a Free Assessment</a>
         </div>
 
         <!-- Team Coaching -->
@@ -100,7 +102,7 @@
             <li>Club consultation available</li>
             <li>Current contract: Coaching Director, Maccabi Basketball NSW</li>
           </ul>
-          <a href="/contact" class="btn-outline" style="margin-top:32px;display:inline-block;">Enquire</a>
+          <a href="/contact" class="btn-outline card-cta">Enquire</a>
         </div>
 
       </div>
@@ -121,10 +123,10 @@
           <li>Game-speed reps under fatigue and pressure</li>
           <li>Confidence to take the open shot</li>
         </ul>
-        <a href="/assessment" class="btn-primary" style="margin-top:32px;display:inline-block;">Book a Free Assessment</a>
+        <a href="/assessment" class="btn-primary card-cta">Book a Free Assessment</a>
       </div>
       <div class="shooting-stats">
-        <p class="section-tag" style="margin-bottom:24px;">On the Court</p>
+        <p class="section-tag">On the Court</p>
         <div class="shooting-stat"><span class="shooting-num">38<em>%</em></span><span class="shooting-label">From three, Waratah League</span></div>
         <div class="shooting-stat"><span class="shooting-num">3.7</span><span class="shooting-label">Threes made per game</span></div>
         <div class="shooting-stat"><span class="shooting-num">2</span><span class="shooting-label">Seasons among the league's best three-point shooters</span></div>
@@ -133,7 +135,7 @@
   </section>
 
   <!-- WHAT TO EXPECT -->
-  <section style="background:var(--grey);">
+  <section class="section-grey">
     <div class="container">
       <p class="section-tag">The Process</p>
       <h2>WHAT TO EXPECT<br>FROM DAY ONE</h2>
@@ -173,7 +175,7 @@
   <!-- CTA -->
   <div class="cta-banner">
     <div class="container">
-      <h2 style="color:var(--black);">NOT SURE WHICH<br>PROGRAM IS RIGHT?</h2>
+      <h2>NOT SURE WHICH<br>PROGRAM IS RIGHT?</h2>
       <a href="/contact" class="btn-black">Let's Talk</a>
     </div>
   </div>
@@ -211,6 +213,7 @@
         <ul>
           <li><a href="mailto:info@nxtrepbasketball.com.au">info@nxtrepbasketball.com.au</a></li>
           <li><a href="/assessment">Book a Free Assessment</a></li>
+          <!-- TODO: replace with the real profile URL. -->
           <li><a href="#">Instagram</a></li>
         </ul>
       </div>
@@ -222,11 +225,6 @@
   </div>
 </footer>
 
-<script>
-  const hamburger = document.getElementById('hamburger');
-  const mobileNav = document.getElementById('mobileNav');
-  hamburger.addEventListener('click', () => mobileNav.classList.toggle('open'));
-  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
-</script>
+<!-- AUDIT: inline menu script removed; /assets/site.js (loaded in <head>) handles it. -->
 </body>
 </html>
