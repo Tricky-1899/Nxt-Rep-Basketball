@@ -420,6 +420,9 @@ section { padding: 100px 0; }
   transition: border-color 0.2s;
   appearance: none;
   -webkit-appearance: none;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 .form-group input:focus,
 .form-group select:focus,
@@ -672,6 +675,7 @@ footer {
 .footer-logo { width: 140px; height: auto; display: block; margin-bottom: 20px; }
 .hero-ball-wrap img { width: 100%; height: auto; display: block; filter: drop-shadow(0 0 40px rgba(230,51,41,0.12)); }
 .hero-logo-mobile { display: none; }
+
 @media (max-width: 1024px) {
   .hero-logo-mobile { display: block; width: 160px; height: auto; margin-bottom: 32px; }
 }
@@ -685,7 +689,6 @@ footer {
 .assess-nudge a { color: var(--red); text-decoration: underline; }
 /* mobile overflow fix for form grids */
 .contact-grid > *, .contact-form > div > * { min-width: 0; }
-.form-group input, .form-group select, .form-group textarea { width: 100%; min-width: 0; box-sizing: border-box; }
 
 /* ─── SHOOTING SECTION (programs) ─── */
 .shooting-section { border-top: 1px solid rgba(245,245,240,0.06); }
@@ -697,18 +700,20 @@ footer {
 .shooting-num { font-family: var(--font-display); font-size: 3.4rem; line-height: 1; color: var(--white); }
 .shooting-num em { font-style: normal; color: var(--red); }
 .shooting-label { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light-grey); margin-top: 8px; }
+
 @media (max-width: 1024px) { .shooting-grid { grid-template-columns: 1fr; gap: 48px; } }
 .shooting-grid .program-details { margin-top: 28px; }
 
 /* ─── HOMEPAGE (moved out of inline styles, see index.html AUDIT notes) ─── */
 .hero-inner { display: grid; grid-template-columns: 1fr 1fr; width: 100%; align-items: center; }
+
 @media (max-width: 1024px) { .hero-inner { grid-template-columns: 1fr; } }
 .section-grey { background: var(--grey); }
 .inline-link { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
 .inline-link:hover { color: var(--red); }
 .about-cta { margin-top: 16px; }
 
-/* ─── ASSESSMENT PAGE (moved from an inline <style> block in assessment.html) ─── */
+/* ─── ASSESSMENT PAGE (moved from an inline \3c style> block in assessment.html) ─── */
 .assess-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: start; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .form-row > * { min-width: 0; }
@@ -725,9 +730,11 @@ footer {
 .price-list div:last-child { border-bottom: none; padding-bottom: 0; }
 .price-list span:first-child { color: var(--light-grey); }
 .price-note { font-size: 0.8rem; color: var(--light-grey); margin-top: 16px; line-height: 1.5; }
+
 @media (max-width: 860px) {
   .assess-grid { grid-template-columns: 1fr; gap: 56px; }
 }
+
 @media (max-width: 520px) {
   .form-row { grid-template-columns: 1fr; }
 }

@@ -10,6 +10,7 @@ Checks every HTML page for:
   - links written as something.html (the site uses clean URLs)
   - a <title>, meta description, viewport tag and favicon
   - duplicate element ids
+  - inline <script>/<style> blocks, on...= handlers and style="" (breaks the CSP)
 Also checks that sitemap.xml lists only pages that exist.
 Uses only the Python standard library.
 """
@@ -35,6 +36,7 @@ class PageParser(HTMLParser):
         self.viewport = False
         self.icon = False
         self._in_title = False
+        self.inline_code = []   # (line, problem)
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -52,6 +54,17 @@ class PageParser(HTMLParser):
             self.viewport = True
         if tag == "link" and "icon" in (a.get("rel") or ""):
             self.icon = True
+        # Inline code would break the strict Content-Security-Policy: keep all
+        # JavaScript in /assets/*.js and all styles in style.css.
+        if tag == "script" and not a.get("src"):
+            self.inline_code.append((line, "inline <script> block; move it to a file in /assets"))
+        if tag == "style":
+            self.inline_code.append((line, "<style> block; move the rules into style.css"))
+        for name in a:
+            if name.startswith("on"):
+                self.inline_code.append((line, f"inline event handler {name}=; attach it in a .js file instead"))
+        if "style" in a:
+            self.inline_code.append((line, "inline style=\"\"; use a class in style.css"))
 
     def handle_data(self, data):
         if self._in_title and data.strip():
@@ -98,6 +111,8 @@ def main():
             errors.append(f"{name}: missing viewport meta tag (breaks mobile layout)")
         if not p.icon:
             warnings.append(f"{name}: no favicon <link>")
+        for line, problem in p.inline_code:
+            errors.append(f"{name}:{line}: {problem}")
         dupes = {i for i in p.ids if p.ids.count(i) > 1}
         for d in sorted(dupes):
             errors.append(f"{name}: duplicate id '{d}'")

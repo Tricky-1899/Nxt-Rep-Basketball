@@ -12,11 +12,13 @@
   // One-line fields: trim and turn control characters (incl. line breaks) into
   // spaces. Stops anyone smuggling extra lines into the email subject.
   function line(node) {
+    // eslint-disable-next-line no-control-regex -- stripping control characters is the point
     return node ? String(node.value || '').trim().replace(/[\u0000-\u001F\u007F]+/g, ' ') : '';
   }
 
   // Multi-line fields: keep line breaks, drop other control characters.
   function text(node) {
+    // eslint-disable-next-line no-control-regex -- stripping control characters is the point
     return node ? String(node.value || '').trim().replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '') : '';
   }
 
@@ -110,7 +112,7 @@
     success.style.display = 'block';
     success.setAttribute('tabindex', '-1');
     success.focus();
-    try { success.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) { /* old browsers */ }
+    try { success.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (ignored) { /* old browsers without smooth scrolling */ }
   }
 
   window.NxtForms = {
