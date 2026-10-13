@@ -10,7 +10,10 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon-light-32.png" media="(prefers-color-scheme: dark)" />
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-dark-192.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
+  <!-- AUDIT: menu script moved to a shared external file. `defer` runs it after
+       the HTML is parsed, so it can never run before the elements exist. -->
+  <script src="/assets/site.js" defer></script>
 </head>
 <body>
 
@@ -26,26 +29,32 @@
         <li><a href="/assessment" class="nav-cta">Book Now</a></li>
       </ul>
     </nav>
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <!-- AUDIT: type="button" + aria-controls/aria-expanded so screen readers
+         announce the menu state (site.js keeps aria-expanded in sync). -->
+    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<div class="mobile-nav" id="mobileNav">
+<!-- AUDIT: <div> → <nav aria-label> so assistive tech recognises it as navigation. -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
   <a href="/">Home</a>
   <a href="/about">About</a>
   <a href="/programs">Programs</a>
   <a href="/partnerships">Partnerships</a>
   <a href="/assessment">Book Now</a>
-</div>
+</nav>
 
 <main>
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grid-overlay"></div>
-    <div class="container" style="display:grid;grid-template-columns:1fr 1fr;width:100%;align-items:center;">
+    <!-- AUDIT (bug fix): this grid was an inline style, which beats every CSS
+         rule, so on phones the hero text was squeezed into half the screen
+         width. Moved to .hero-inner in style.css with a one-column mobile rule. -->
+    <div class="container hero-inner">
       <div class="hero-text">
         <img src="/assets/logo-light.png" alt="Nxt Rep Basketball" class="hero-logo-mobile" width="800" height="828" />
         <p class="hero-eyebrow">NSW Basketball Coaching</p>
@@ -58,7 +67,9 @@
       </div>
       <div class="hero-visual">
         <div class="hero-ball-wrap">
-          <img src="/assets/logo-light.png" alt="Nxt Rep Basketball" width="800" height="828" />
+          <!-- AUDIT: alt="" here because the mobile logo above already carries the
+               name; screen readers otherwise announce "Nxt Rep Basketball" twice. -->
+          <img src="/assets/logo-light.png" alt="" width="800" height="828" fetchpriority="high" />
         </div>
       </div>
     </div>
@@ -117,7 +128,7 @@
             </svg>
           </div>
           <h3>PRIVATE TRAINING</h3>
-          <p>1-on-1 sessions tailored to your specific needs, led by a specialist <a href="/programs#shooting" style="color:var(--white);text-decoration:underline;text-underline-offset:3px;">shooting coach</a>. Whether you're working on shooting mechanics, handles, footwork or game IQ — sessions are built around your development, your timeline.</p>
+          <p>1-on-1 sessions tailored to your specific needs, led by a specialist <a href="/programs#shooting" class="inline-link">shooting coach</a>. Whether you're working on shooting mechanics, handles, footwork or game IQ — sessions are built around your development, your timeline.</p>
           <a href="/programs" class="service-link">Learn more →</a>
         </div>
         <!-- Coaching -->
@@ -138,7 +149,9 @@
   </section>
 
   <!-- ABOUT SPLIT -->
-  <section style="background:var(--grey);padding:100px 0;">
+  <!-- AUDIT: removed inline padding:100px 0. It duplicated the default section
+       padding and blocked any smaller mobile padding. -->
+  <section class="section-grey">
     <div class="container">
       <div class="about-split">
         <div class="about-visual">
@@ -163,7 +176,7 @@
           <h2>COACHING BUILT ON REAL EXPERIENCE</h2>
           <p>Nxt Rep Basketball is run by Yianni — a combo guard who developed in Australia and played professionally in Europe. He brings that same professional-level experience, intensity and attention to detail into every session.</p>
           <p>The philosophy is simple: basketball isn't just about reps. It's about the right reps - intentional & progressive training that builds the habits serious players need to compete at the next level.</p>
-          <a href="/about" class="btn-outline" style="margin-top:16px;">Our Story</a>
+          <a href="/about" class="btn-outline about-cta">Our Story</a>
         </div>
       </div>
     </div>
@@ -210,7 +223,8 @@
   <!-- CTA BANNER -->
   <div class="cta-banner">
     <div class="container">
-      <h2 style="color:var(--black);">READY TO TAKE<br>THE NEXT REP?</h2>
+      <!-- AUDIT: removed inline color. .cta-banner h2 in style.css already sets it. -->
+      <h2>READY TO TAKE<br>THE NEXT REP?</h2>
       <a href="/assessment" class="btn-black">Book a Free Assessment</a>
     </div>
   </div>
@@ -247,6 +261,7 @@
         <ul>
           <li><a href="mailto:info@nxtrepbasketball.com.au">info@nxtrepbasketball.com.au</a></li>
           <li><a href="/assessment">Book a Free Assessment</a></li>
+          <!-- TODO: replace with the real profile URL. href="#" just jumps to the top of the page. -->
           <li><a href="#">Instagram</a></li>
         </ul>
       </div>
@@ -258,15 +273,7 @@
   </div>
 </footer>
 
-<script>
-  const hamburger = document.getElementById('hamburger');
-  const mobileNav = document.getElementById('mobileNav');
-  hamburger.addEventListener('click', () => {
-    mobileNav.classList.toggle('open');
-  });
-  mobileNav.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => mobileNav.classList.remove('open'));
-  });
-</script>
+<!-- AUDIT: inline menu script removed. It now lives in /assets/site.js (loaded in
+     <head>) with null-checks, aria state, Escape-to-close and resize handling. -->
 </body>
 </html>

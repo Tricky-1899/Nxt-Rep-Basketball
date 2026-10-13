@@ -699,3 +699,11 @@ footer {
 .shooting-label { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light-grey); margin-top: 8px; }
 @media (max-width: 1024px) { .shooting-grid { grid-template-columns: 1fr; gap: 48px; } }
 .shooting-grid .program-details { margin-top: 28px; }
+
+/* ─── HOMEPAGE (moved out of inline styles, see index.html AUDIT notes) ─── */
+.hero-inner { display: grid; grid-template-columns: 1fr 1fr; width: 100%; align-items: center; }
+@media (max-width: 1024px) { .hero-inner { grid-template-columns: 1fr; } }
+.section-grey { background: var(--grey); }
+.inline-link { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
+.inline-link:hover { color: var(--red); }
+.about-cta { margin-top: 16px; }
