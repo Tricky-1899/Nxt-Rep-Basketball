@@ -753,3 +753,13 @@ footer {
 .legal a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
 .legal strong { color: var(--white); font-weight: 500; }
 .legal-updated { font-size: 0.85rem; color: var(--light-grey); }
+
+/* ─── CONTACT PAGE (moved from inline styles in contact.html) ─── */
+.contact-detail-text a { color: var(--light-grey); }
+.quick-ref { margin-top: 48px; padding: 32px; background: var(--grey); }
+.contact-info .quick-ref .section-tag { margin-bottom: 16px; }
+.quick-ref ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.quick-ref li { display: flex; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid rgba(245,245,240,0.06); font-size: 0.85rem; }
+.quick-ref li:last-child { padding-bottom: 0; border-bottom: none; }
+.quick-ref li span { color: var(--light-grey); }
+.quick-ref li a { color: var(--red); }
