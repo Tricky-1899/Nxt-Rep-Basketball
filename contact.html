@@ -10,7 +10,12 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon-light-32.png" media="(prefers-color-scheme: dark)" />
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-dark-192.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
+  <!-- AUDIT: all JavaScript now lives in files (no inline scripts or onclick).
+       forms.js holds the validation/sending logic shared with /assessment. -->
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/forms.js" defer></script>
+  <script src="/assets/contact.js" defer></script>
 </head>
 <body>
 
@@ -26,19 +31,19 @@
         <li><a href="/assessment" class="nav-cta">Book Now</a></li>
       </ul>
     </nav>
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<div class="mobile-nav" id="mobileNav">
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
   <a href="/">Home</a>
   <a href="/about">About</a>
   <a href="/programs">Programs</a>
   <a href="/partnerships">Partnerships</a>
   <a href="/assessment">Book Now</a>
-</div>
+</nav>
 
 <main>
   <div class="page-header">
@@ -62,29 +67,32 @@
 
         <!-- FORM -->
         <div>
-          <p class="section-tag" style="margin-bottom:32px;">Send a Message</p>
-          <div class="contact-form" id="contactForm">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <p class="section-tag form-tag">Send a Message</p>
+          <!-- AUDIT: was a <div> with an onclick button, so Enter didn't submit and
+               labels weren't linked to their fields. Now a real <form> with linked
+               labels, length limits, autofill hints and a honeypot spam trap. -->
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
               <div class="form-group">
-                <label>First name</label>
-                <input type="text" placeholder="Yianni" id="firstName" />
+                <label for="firstName">First name</label>
+                <input type="text" id="firstName" autocomplete="given-name" placeholder="Yianni" maxlength="60" required />
               </div>
               <div class="form-group">
-                <label>Last name</label>
-                <input type="text" placeholder="Smith" id="lastName" />
+                <label for="lastName">Last name</label>
+                <input type="text" id="lastName" autocomplete="family-name" placeholder="Smith" maxlength="60" />
               </div>
             </div>
             <div class="form-group">
-              <label>Email address</label>
-              <input type="email" placeholder="you@email.com" id="email" />
+              <label for="email">Email address</label>
+              <input type="email" id="email" autocomplete="email" inputmode="email" placeholder="you@email.com" maxlength="120" required />
             </div>
             <div class="form-group">
-              <label>Phone (optional)</label>
-              <input type="tel" placeholder="04XX XXX XXX" id="phone" />
+              <label for="phone">Phone (optional)</label>
+              <input type="tel" id="phone" autocomplete="tel" inputmode="tel" placeholder="04XX XXX XXX" maxlength="20" />
             </div>
             <div class="form-group">
-              <label>What are you enquiring about?</label>
-              <select id="enquiryType">
+              <label for="enquiryType">What are you enquiring about?</label>
+              <select id="enquiryType" required>
                 <option value="" disabled selected>Select an option</option>
                 <option>Private training session</option>
                 <option>School program partnership</option>
@@ -96,21 +104,28 @@
               Booking private training? Start with a <a href="/assessment">free assessment</a>. It takes a minute and gets your child's details to Yianni straight away.
             </div>
             <div class="form-group">
-              <label>Message</label>
-              <textarea placeholder="Tell us a bit about what you're looking for, your age group, location, or anything else relevant." id="message"></textarea>
+              <label for="message">Message</label>
+              <textarea id="message" placeholder="Tell us a bit about what you're looking for, your age group, location, or anything else relevant." maxlength="2000" required></textarea>
             </div>
-            <button class="btn-primary" id="submitBtn" style="border:none;cursor:pointer;font-family:var(--font-body);" onclick="handleSubmit()">Send Message</button>
+            <!-- Honeypot spam trap: hidden from people and screen readers; bots fill it in. -->
+            <div class="hp-field" aria-hidden="true">
+              <label for="website">Leave this empty</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+            <!-- AUDIT: on-page error box replaces alert() pop-ups. -->
+            <div class="form-error" id="formError" role="alert"></div>
+            <button type="submit" class="btn-primary form-submit" id="submitBtn">Send Message</button>
             <p class="form-privacy">Your message is sent to us by email through FormSubmit, a third-party form service. See our <a href="/privacy">privacy notice</a>.</p>
-          </div>
-          <div id="successMsg" style="display:none;padding:32px;background:var(--grey);border-left:3px solid var(--red);margin-top:20px;">
-            <h3 style="font-size:1.4rem;margin-bottom:8px;">Message sent.</h3>
+          </form>
+          <div id="successMsg" class="success-box" role="status">
+            <h3>Message sent.</h3>
             <p>We'll get back to you within 24 hours.</p>
           </div>
         </div>
 
         <!-- CONTACT INFO -->
         <div class="contact-info">
-          <p class="section-tag" style="margin-bottom:32px;">Direct Contact</p>
+          <p class="section-tag form-tag">Direct Contact</p>
           <h3>WE'LL GET BACK<br>TO YOU FAST.</h3>
           <p>Response time is usually within 24 hours. For urgent bookings, email directly.</p>
 
@@ -123,7 +138,7 @@
             </div>
             <div class="contact-detail-text">
               <strong>Email</strong>
-              <a href="mailto:info@nxtrepbasketball.com.au" style="color:#888;">info@nxtrepbasketball.com.au</a>
+              <a href="mailto:info@nxtrepbasketball.com.au">info@nxtrepbasketball.com.au</a>
             </div>
           </div>
 
@@ -150,26 +165,18 @@
             </div>
             <div class="contact-detail-text">
               <strong>Instagram</strong>
-              <a href="#" style="color:#888;">@nxtrep</a>
+              <!-- TODO: real Instagram URL --><a href="#">@nxtrep</a>
             </div>
           </div>
 
-          <div style="margin-top:48px;padding:32px;background:var(--grey);">
-            <p class="section-tag" style="margin-bottom:16px;">Quick Reference</p>
-            <div style="display:flex;flex-direction:column;gap:12px;">
-              <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid rgba(245,245,240,0.06);">
-                <span style="font-size:0.85rem;color:#888;">School programs</span>
-                <a href="/partnerships" style="font-size:0.85rem;color:var(--red);">Learn more →</a>
-              </div>
-              <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid rgba(245,245,240,0.06);">
-                <span style="font-size:0.85rem;color:#888;">Private training</span>
-                <a href="/programs" style="font-size:0.85rem;color:var(--red);">Learn more →</a>
-              </div>
-              <div style="display:flex;justify-content:space-between;">
-                <span style="font-size:0.85rem;color:#888;">Team coaching</span>
-                <a href="/programs" style="font-size:0.85rem;color:var(--red);">Learn more →</a>
-              </div>
-            </div>
+          <!-- AUDIT: 11 inline styles replaced by the .quick-ref classes in style.css. -->
+          <div class="quick-ref">
+            <p class="section-tag">Quick Reference</p>
+            <ul>
+              <li><span>School programs</span><a href="/partnerships">Learn more →</a></li>
+              <li><span>Private training</span><a href="/programs">Learn more →</a></li>
+              <li><span>Team coaching</span><a href="/programs">Learn more →</a></li>
+            </ul>
           </div>
         </div>
 
@@ -210,6 +217,7 @@
         <ul>
           <li><a href="mailto:info@nxtrepbasketball.com.au">info@nxtrepbasketball.com.au</a></li>
           <li><a href="/assessment">Book a Free Assessment</a></li>
+          <!-- TODO: replace with the real profile URL. -->
           <li><a href="#">Instagram</a></li>
         </ul>
       </div>
@@ -221,28 +229,6 @@
   </div>
 </footer>
 
-<script>
-  const hamburger = document.getElementById('hamburger');
-  const mobileNav = document.getElementById('mobileNav');
-  hamburger.addEventListener('click', () => mobileNav.classList.toggle('open'));
-  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
-
-  document.getElementById('enquiryType').addEventListener('change', e => {
-    document.getElementById('assessNudge').style.display = e.target.value === 'Private training session' ? 'block' : 'none';
-  });
-
-  function handleSubmit() {
-    const first = document.getElementById('firstName').value;
-    const email = document.getElementById('email').value;
-    const enquiry = document.getElementById('enquiryType').value;
-    const message = document.getElementById('message').value;
-    if (!first || !email || !enquiry || !message) {
-      alert('Please fill in all required fields.');
-      return;
-    }
-    const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.textContent = 'Sending...'; fetch('https://formsubmit.co/ajax/info@nxtrepbasketball.com.au', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ name: first + ' ' + document.getElementById('lastName').value, email: email, phone: document.getElementById('phone').value, enquiry: enquiry, message: message, _subject: 'New website enquiry: ' + enquiry, _replyto: email, _template: 'table' }) }).then(r => r.json()).then(d => { if (d.success === 'true' || d.success === true) { document.getElementById('contactForm').style.display = 'none'; document.getElementById('successMsg').style.display = 'block'; } else { throw new Error('send failed'); } }).catch(() => { btn.disabled = false; btn.textContent = 'Send Message'; alert('Sorry, that did not send. Please email info@nxtrepbasketball.com.au directly.'); });
-    
-  }
-</script>
+<!-- AUDIT: inline script removed. Menu → site.js, form → forms.js + contact.js. -->
 </body>
 </html>
