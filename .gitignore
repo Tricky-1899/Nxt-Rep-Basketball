@@ -1,0 +1,23 @@
+# Secrets and environment variables: never commit these
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Vercel CLI local settings
+.vercel
+
+# Dependencies and build output (if a build step is ever added)
+node_modules/
+dist/
+.cache/
+
+# OS and editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.log
