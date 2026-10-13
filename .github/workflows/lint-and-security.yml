@@ -1,0 +1,90 @@
+# Lint + security scan for the Nxt Rep Basketball website.
+#
+# Runs on every pull request into main, so problems show as a ❌ on the PR
+# before anything reaches the live site. Also runs on main after a merge and
+# weekly, so CodeQL picks up newly discovered vulnerability patterns.
+#
+# Linter rules live in the repo root: .htmlhintrc, eslint.config.mjs, .stylelintrc.json
+
+name: Lint and security scan
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 20 * * 0"   # Mondays ~7:17am Sydney (Sunday 20:17 UTC)
+  workflow_dispatch:         # "Run workflow" button in the Actions tab
+
+# Least privilege by default; jobs ask for more only if they need it.
+permissions:
+  contents: read
+
+# A newer push to the same PR cancels the older, now-pointless run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint (HTML, JavaScript, CSS)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # Exact versions so a linter update can't suddenly fail your PRs.
+      # --no-save: the site itself stays npm-free (no package.json committed).
+      - name: Install linters
+        run: >
+          npm install --no-save --no-package-lock --no-audit --no-fund
+          htmlhint@1.9.2
+          eslint@9.39.5 @eslint/js@9.39.5 globals@15.15.0
+          stylelint@16.26.1 stylelint-config-standard@36.0.1
+
+      # Each linter runs even if an earlier one fails, so you see every problem at once.
+      - name: HTML (HTMLHint)
+        if: always()
+        run: npx --no-install htmlhint "*.html"
+
+      - name: JavaScript (ESLint, incl. innerHTML/eval/document.write bans)
+        if: always()
+        run: npx --no-install eslint "assets/**/*.js"
+
+      - name: CSS (Stylelint)
+        if: always()
+        run: npx --no-install stylelint "style.css"
+
+  codeql:
+    name: Security scan (CodeQL, ${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      security-events: write   # upload findings to the repo's Security tab
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        # javascript-typescript: your site's JS (forms, menu)
+        # actions: these workflow files themselves (e.g. injection in run: steps)
+        language: [javascript-typescript, actions]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Initialise CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: none
+          queries: security-extended
+
+      - name: Run CodeQL analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
