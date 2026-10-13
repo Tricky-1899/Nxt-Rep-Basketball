@@ -49,6 +49,13 @@
     </div>
   </div>
 
+  <div class="assess-strip">
+    <div class="container assess-strip-inner">
+      <p><strong>Booking for a player?</strong> The first session is free.</p>
+      <a href="/assessment" class="btn-primary">Book an Assessment &rarr;</a>
+    </div>
+  </div>
+
   <section>
     <div class="container">
       <div class="contact-grid">
@@ -84,6 +91,9 @@
                 <option>Team / club coaching</option>
                 <option>General enquiry</option>
               </select>
+            </div>
+            <div class="assess-nudge" id="assessNudge">
+              Booking private training? Start with a <a href="/assessment">free assessment</a>. It takes a minute and gets your child's details to Yianni straight away.
             </div>
             <div class="form-group">
               <label>Message</label>
@@ -214,6 +224,10 @@
   const mobileNav = document.getElementById('mobileNav');
   hamburger.addEventListener('click', () => mobileNav.classList.toggle('open'));
   mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+  document.getElementById('enquiryType').addEventListener('change', e => {
+    document.getElementById('assessNudge').style.display = e.target.value === 'Private training session' ? 'block' : 'none';
+  });
 
   function handleSubmit() {
     const first = document.getElementById('firstName').value;

@@ -675,3 +675,14 @@ footer {
 @media (max-width: 1024px) {
   .hero-logo-mobile { display: block; width: 160px; height: auto; margin-bottom: 32px; }
 }
+
+/* ─── ASSESSMENT PROMPTS (contact page) ─── */
+.assess-strip { background: var(--grey); border-bottom: 1px solid rgba(245,245,240,0.06); }
+.assess-strip-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 24px; padding-bottom: 24px; flex-wrap: wrap; }
+.assess-strip p { margin: 0; font-size: 1rem; }
+.assess-strip strong { color: var(--white); }
+.assess-nudge { display: none; padding: 14px 18px; border-left: 3px solid var(--red); background: var(--grey); font-size: 0.9rem; line-height: 1.5; }
+.assess-nudge a { color: var(--red); text-decoration: underline; }
+/* mobile overflow fix for form grids */
+.contact-grid > *, .contact-form > div > * { min-width: 0; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; min-width: 0; box-sizing: border-box; }
