@@ -741,3 +741,15 @@ footer {
 /* Honeypot: off-screen (not display:none, which some bots skip) and ignored by screen readers. */
 .hp-field { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .form-group [aria-invalid="true"] { border-color: var(--red); }
+
+/* ─── PRIVACY (form notice + /privacy page) ─── */
+.form-privacy { font-size: 0.8rem; line-height: 1.5; color: var(--light-grey); margin: 0; }
+.form-privacy a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
+.legal { max-width: 760px; }
+.legal h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 48px 0 16px; }
+.legal p, .legal li { color: var(--light-grey); line-height: 1.7; }
+.legal ul { padding-left: 20px; margin: 0 0 16px; }
+.legal li { margin-bottom: 8px; }
+.legal a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
+.legal strong { color: var(--white); font-weight: 500; }
+.legal-updated { font-size: 0.85rem; color: var(--light-grey); }
