@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Book a free basketball assessment with Nxt Rep Basketball. 1-on-1 and small-group skill sessions for players aged 8–16 in Sydney." />
+  <title>Free Assessment | Nxt Rep Basketball</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .assess-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: start; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-row > * { min-width: 0; }
+    .consent { display: flex; gap: 12px; align-items: flex-start; font-size: 0.85rem; color: var(--light-grey); line-height: 1.5; cursor: pointer; }
+    .consent input { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: var(--red); cursor: pointer; }
+    .form-error { display: none; padding: 16px 20px; border-left: 3px solid var(--red); background: var(--grey); font-size: 0.9rem; }
+    .form-error a { color: var(--red); }
+    .steps { list-style: none; padding: 0; margin: 0; counter-reset: step; }
+    .steps li { counter-increment: step; position: relative; padding: 0 0 24px 48px; color: var(--light-grey); font-size: 0.95rem; line-height: 1.6; }
+    .steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border: 1px solid var(--red); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1rem; }
+    .steps strong { color: var(--white); display: block; margin-bottom: 2px; }
+    .price-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+    .price-list div { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(245,245,240,0.06); font-size: 0.85rem; }
+    .price-list div:last-child { border-bottom: none; padding-bottom: 0; }
+    .price-list span:first-child { color: var(--light-grey); }
+    .price-note { font-size: 0.8rem; color: var(--light-grey); margin-top: 16px; line-height: 1.5; }
+    @media (max-width: 860px) {
+      .assess-grid { grid-template-columns: 1fr; gap: 56px; }
+    }
+    @media (max-width: 520px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav-container">
+    <a href="index.html" class="logo-text">NXT<span>.</span>REP</a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="partnerships.html">Partnerships</a></li>
+        <li><a href="assessment.html" class="nav-cta active">Book Now</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="programs.html">Programs</a>
+  <a href="partnerships.html">Partnerships</a>
+  <a href="assessment.html">Book Now</a>
+</div>
+
+<main>
+  <div class="page-header">
+    <div class="container">
+      <p class="section-tag">Free Assessment</p>
+      <h1>FIRST SESSION<br>IS ON US.</h1>
+      <p>Book a free assessment for your child. We'll see where their game is at, find the two or three things that will make the biggest difference, and give you a clear development plan, whether or not you continue.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="assess-grid">
+
+        <!-- FORM -->
+        <div>
+          <p class="section-tag" style="margin-bottom:32px;">Book the Assessment</p>
+          <form class="contact-form" id="assessForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="parentName">Parent / guardian name</label>
+                <input type="text" id="parentName" autocomplete="name" placeholder="Full name" required />
+              </div>
+              <div class="form-group">
+                <label for="mobile">Mobile</label>
+                <input type="tel" id="mobile" autocomplete="tel" placeholder="04XX XXX XXX" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" id="email" autocomplete="email" placeholder="you@email.com" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="childName">Player's first name</label>
+                <input type="text" id="childName" placeholder="First name" required />
+              </div>
+              <div class="form-group">
+                <label for="childAge">Player's age</label>
+                <select id="childAge" required>
+                  <option value="" disabled selected>Select age</option>
+                  <option>7 or under</option>
+                  <option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+                  <option>13</option><option>14</option><option>15</option><option>16</option>
+                  <option>17+</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="level">Current level</label>
+                <select id="level" required>
+                  <option value="" disabled selected>Select level</option>
+                  <option>Just starting out</option>
+                  <option>School / social basketball</option>
+                  <option>Club / domestic competition</option>
+                  <option>Representative / development squad</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="format">Interested in</label>
+                <select id="format" required>
+                  <option value="" disabled selected>Select an option</option>
+                  <option>1-on-1 training</option>
+                  <option>Small-group training</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="suburb">Suburb</label>
+              <input type="text" id="suburb" placeholder="e.g. Arncliffe" required />
+            </div>
+            <div class="form-group">
+              <label for="goals">Anything we should know? (optional)</label>
+              <textarea id="goals" placeholder="Goals, strengths, things they want to work on, best days and times."></textarea>
+            </div>
+            <label class="consent" for="consent">
+              <input type="checkbox" id="consent" />
+              <span>I'm happy to receive updates about sessions and programs from Nxt Rep Basketball by email and SMS. I can opt out at any time.</span>
+            </label>
+            <div class="form-error" id="formError" role="alert"></div>
+            <button type="submit" class="btn-primary" id="submitBtn" style="border:none;cursor:pointer;font-family:var(--font-body);">Book Free Assessment</button>
+          </form>
+          <div id="successMsg" style="display:none;padding:32px;background:var(--grey);border-left:3px solid var(--red);margin-top:20px;">
+            <h3 style="font-size:1.4rem;margin-bottom:8px;">You're booked in.</h3>
+            <p>Yianni will be in touch within 24 hours to lock in a time and place.</p>
+          </div>
+        </div>
+
+        <!-- INFO -->
+        <div class="contact-info">
+          <p class="section-tag" style="margin-bottom:32px;">How It Works</p>
+          <ol class="steps">
+            <li><strong>Book</strong>Fill in the form. It takes about a minute.</li>
+            <li><strong>We'll call you</strong>Yianni gets in touch within 24 hours to set a time and court.</li>
+            <li><strong>Assessment</strong>A free session on court: footwork, ball-handling, finishing, shooting and decision-making.</li>
+            <li><strong>Your plan</strong>You get the 2–3 priorities for your child's development, and the options to keep going.</li>
+          </ol>
+
+          <div style="margin-top:32px;padding:32px;background:var(--grey);">
+            <p class="section-tag" style="margin-bottom:8px;">After the Assessment</p>
+            <div class="price-list">
+              <div><span>1-on-1</span><span>$100 / hr</span></div>
+              <div><span>Group of 2</span><span>$50 / player / hr</span></div>
+              <div><span>Group of 3</span><span>$40 / player / hr</span></div>
+              <div><span>Group of 4+</span><span>$30 / player / hr</span></div>
+            </div>
+            <p class="price-note">Sessions run at an outdoor court near you. Most families choose indoor, with court hire added at cost.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-text">NXT<span style="color:var(--red)">.</span>REP</span>
+        <p>Professional basketball coaching, school programs and private training across NSW, Australia.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="partnerships.html">Partnerships</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="programs.html">School Programs</a></li>
+          <li><a href="programs.html">Private Training</a></li>
+          <li><a href="programs.html">Team Coaching</a></li>
+          <li><a href="partnerships.html">Partner With Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@nxtrepbasketball.com.au">info@nxtrepbasketball.com.au</a></li>
+          <li><a href="assessment.html">Book a Free Assessment</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Nxt Rep Basketball. All rights reserved.</p>
+      <p>NSW, Australia</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', () => mobileNav.classList.toggle('open'));
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+  const form = document.getElementById('assessForm');
+  const errorBox = document.getElementById('formError');
+  const val = id => document.getElementById(id).value.trim();
+
+  function showError(html) {
+    errorBox.innerHTML = html;
+    errorBox.style.display = 'block';
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    errorBox.style.display = 'none';
+
+    const required = ['parentName', 'mobile', 'email', 'childName', 'childAge', 'level', 'format', 'suburb'];
+    const missing = required.filter(id => !val(id));
+    if (missing.length) {
+      showError('Please fill in all the required fields. Only the notes box is optional.');
+      document.getElementById(missing[0]).focus();
+      return;
+    }
+    if (!/^\S+@\S+\.\S+$/.test(val('email'))) {
+      showError('Please check your email address.');
+      document.getElementById('email').focus();
+      return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Booking...';
+
+    fetch('https://formsubmit.co/ajax/info@nxtrepbasketball.com.au', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        'Parent name': val('parentName'),
+        'Mobile': val('mobile'),
+        'Email': val('email'),
+        'Player': val('childName'),
+        'Age': val('childAge'),
+        'Level': val('level'),
+        'Interested in': val('format'),
+        'Suburb': val('suburb'),
+        'Notes': val('goals'),
+        'Marketing consent': document.getElementById('consent').checked ? 'YES - opted in to email/SMS updates' : 'No',
+        _subject: 'Free assessment: ' + val('childName') + ' (' + val('childAge') + ', ' + val('suburb') + ')',
+        _replyto: val('email'),
+        _template: 'table'
+      })
+    })
+      .then(r => r.json())
+      .then(d => {
+        if (d.success === 'true' || d.success === true) {
+          form.style.display = 'none';
+          document.getElementById('successMsg').style.display = 'block';
+          window.scrollTo({ top: document.getElementById('successMsg').offsetTop - 120, behavior: 'smooth' });
+        } else {
+          throw new Error('send failed');
+        }
+      })
+      .catch(() => {
+        btn.disabled = false;
+        btn.textContent = 'Book Free Assessment';
+        showError('Sorry, that didn\'t send. Please try again, or email <a href="mailto:info@nxtrepbasketball.com.au">info@nxtrepbasketball.com.au</a>.');
+      });
+  });
+</script>
+</body>
+</html>

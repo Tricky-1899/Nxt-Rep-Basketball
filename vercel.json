@@ -1,1 +1,1 @@
-{"rewrites":[{"source":"/about","destination":"/about.html"},{"source":"/programs","destination":"/programs.html"},{"source":"/partnerships","destination":"/partnerships.html"},{"source":"/contact","destination":"/contact.html"}]}
+{"rewrites": [{"source": "/about", "destination": "/about.html"}, {"source": "/programs", "destination": "/programs.html"}, {"source": "/partnerships", "destination": "/partnerships.html"}, {"source": "/contact", "destination": "/contact.html"}, {"source": "/assessment", "destination": "/assessment.html"}]}
