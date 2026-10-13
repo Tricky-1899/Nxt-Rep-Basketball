@@ -686,3 +686,16 @@ footer {
 /* mobile overflow fix for form grids */
 .contact-grid > *, .contact-form > div > * { min-width: 0; }
 .form-group input, .form-group select, .form-group textarea { width: 100%; min-width: 0; box-sizing: border-box; }
+
+/* ─── SHOOTING SECTION (programs) ─── */
+.shooting-section { border-top: 1px solid rgba(245,245,240,0.06); }
+.shooting-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+.shooting-grid h2 { margin-bottom: 24px; }
+.shooting-stats { padding: 40px; background: var(--grey); border-left: 3px solid var(--red); }
+.shooting-stat { display: flex; flex-direction: column; padding: 20px 0; border-bottom: 1px solid rgba(245,245,240,0.06); }
+.shooting-stat:last-child { border-bottom: none; padding-bottom: 0; }
+.shooting-num { font-family: var(--font-display); font-size: 3.4rem; line-height: 1; color: var(--white); }
+.shooting-num em { font-style: normal; color: var(--red); }
+.shooting-label { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light-grey); margin-top: 8px; }
+@media (max-width: 1024px) { .shooting-grid { grid-template-columns: 1fr; gap: 48px; } }
+.shooting-grid .program-details { margin-top: 28px; }
