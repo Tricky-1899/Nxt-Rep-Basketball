@@ -10,7 +10,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon-light-32.png" media="(prefers-color-scheme: dark)" />
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-dark-192.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
+  <!-- AUDIT: shared menu script (null-safe, accessible), replaces the inline one. -->
+  <script src="/assets/site.js" defer></script>
 </head>
 <body>
 
@@ -20,25 +22,27 @@
     <nav>
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/about" class="active">About</a></li>
+        <li><a href="/about" class="active" aria-current="page">About</a></li>
         <li><a href="/programs">Programs</a></li>
         <li><a href="/partnerships">Partnerships</a></li>
         <li><a href="/assessment" class="nav-cta">Book Now</a></li>
       </ul>
     </nav>
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <!-- AUDIT: type="button" + aria state for screen readers (kept in sync by site.js). -->
+    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<div class="mobile-nav" id="mobileNav">
+<!-- AUDIT: <div> → <nav aria-label> so assistive tech recognises it as navigation. -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
   <a href="/">Home</a>
-  <a href="/about">About</a>
+  <a href="/about" aria-current="page">About</a>
   <a href="/programs">Programs</a>
   <a href="/partnerships">Partnerships</a>
   <a href="/assessment">Book Now</a>
-</div>
+</nav>
 
 <main>
   <!-- PAGE HEADER -->
@@ -115,7 +119,8 @@
   </section>
 
   <!-- PHILOSOPHY -->
-  <section style="background:var(--grey);">
+  <!-- AUDIT: inline background → shared .section-grey class. -->
+  <section class="section-grey">
     <div class="container">
       <p class="section-tag">Philosophy</p>
       <h2>HOW WE THINK<br>ABOUT BASKETBALL</h2>
@@ -157,7 +162,8 @@
   <!-- CTA -->
   <div class="cta-banner">
     <div class="container">
-      <h2 style="color:var(--black);">WANT TO WORK<br>TOGETHER?</h2>
+      <!-- AUDIT: removed inline color. .cta-banner h2 in style.css already sets it. -->
+      <h2>WANT TO WORK<br>TOGETHER?</h2>
       <a href="/contact" class="btn-black">Get in Touch</a>
     </div>
   </div>
@@ -194,6 +200,7 @@
         <ul>
           <li><a href="mailto:info@nxtrepbasketball.com.au">info@nxtrepbasketball.com.au</a></li>
           <li><a href="/assessment">Book a Free Assessment</a></li>
+          <!-- TODO: replace with the real profile URL. href="#" just jumps to the top of the page. -->
           <li><a href="#">Instagram</a></li>
         </ul>
       </div>
@@ -205,11 +212,6 @@
   </div>
 </footer>
 
-<script>
-  const hamburger = document.getElementById('hamburger');
-  const mobileNav = document.getElementById('mobileNav');
-  hamburger.addEventListener('click', () => mobileNav.classList.toggle('open'));
-  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
-</script>
+<!-- AUDIT: inline menu script removed; /assets/site.js (loaded in <head>) handles it. -->
 </body>
 </html>
