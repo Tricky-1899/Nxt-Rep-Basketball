@@ -707,3 +707,37 @@ footer {
 .inline-link { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
 .inline-link:hover { color: var(--red); }
 .about-cta { margin-top: 16px; }
+
+/* ─── ASSESSMENT PAGE (moved from an inline <style> block in assessment.html) ─── */
+.assess-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: start; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-row > * { min-width: 0; }
+.consent { display: flex; gap: 12px; align-items: flex-start; font-size: 0.85rem; color: var(--light-grey); line-height: 1.5; cursor: pointer; }
+.consent input { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: var(--red); cursor: pointer; }
+.form-error { display: none; padding: 16px 20px; border-left: 3px solid var(--red); background: var(--grey); font-size: 0.9rem; }
+.form-error a { color: var(--red); }
+.steps { list-style: none; padding: 0; margin: 0; counter-reset: step; }
+.steps li { counter-increment: step; position: relative; padding: 0 0 24px 48px; color: var(--light-grey); font-size: 0.95rem; line-height: 1.6; }
+.steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border: 1px solid var(--red); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1rem; }
+.steps strong { color: var(--white); display: block; margin-bottom: 2px; }
+.price-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+.price-list div { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(245,245,240,0.06); font-size: 0.85rem; }
+.price-list div:last-child { border-bottom: none; padding-bottom: 0; }
+.price-list span:first-child { color: var(--light-grey); }
+.price-note { font-size: 0.8rem; color: var(--light-grey); margin-top: 16px; line-height: 1.5; }
+@media (max-width: 860px) {
+  .assess-grid { grid-template-columns: 1fr; gap: 56px; }
+}
+@media (max-width: 520px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+.section-tag.form-tag { margin-bottom: 32px; }
+.form-submit { border: none; cursor: pointer; font-family: var(--font-body); }
+.success-box { display: none; padding: 32px; background: var(--grey); border-left: 3px solid var(--red); margin-top: 20px; }
+.success-box h3 { font-size: 1.4rem; margin-bottom: 8px; }
+.success-box:focus { outline: none; }
+.price-card { margin-top: 32px; padding: 32px; background: var(--grey); }
+.price-card .section-tag { margin-bottom: 8px; }
+/* Honeypot: off-screen (not display:none, which some bots skip) and ignored by screen readers. */
+.hp-field { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.form-group [aria-invalid="true"] { border-color: var(--red); }
